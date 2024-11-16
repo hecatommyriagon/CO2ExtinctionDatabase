@@ -16,6 +16,8 @@
 -- below. You may not need to do every single step, depending on your
 -- model.
 
+DROP TABLE IF EXISTS data;
+
 CREATE TABLE data (
    country TEXT,
    year NUMERIC(4,0),
@@ -25,3 +27,4 @@ CREATE TABLE data (
    child_mortality NUMERIC(4,1)
 );
 
+-- UPDATE data SET country ='Afghanistan' WHERE country = '﻿Afghanistan';

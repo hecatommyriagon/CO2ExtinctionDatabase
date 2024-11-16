@@ -15,3 +15,7 @@ CREATE TABLE data (
    life_expectancy NUMERIC(3,1),
    child_mortality NUMERIC(4,1)
 );
+
+ We used this command: psql \COPY jhulvey.data FROM data/actual_data.csv DELIMITER ';' NULL 'NULL'
+
+And had to make this edit: UPDATE data SET country ='Afghanistan' WHERE country = '﻿Afghanistan';
