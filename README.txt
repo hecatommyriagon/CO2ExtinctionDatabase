@@ -95,3 +95,49 @@ Output of Query 1 (from middle of query):
             52.9 |   12.400 | USA                            | 1909
 
 
+Question 2: Do countries with longer names have higher infant mortality rates?
+
+Query 2:
+
+SELECT 
+   country_name_len, 
+   AVG(avg_child_mort) AS avg_child_mort
+FROM (
+   SELECT 
+      country,
+      LENGTH(country) AS country_name_len,
+      AVG(child_mortality) AS avg_child_mort
+   FROM data 
+   GROUP BY country
+) AS temp 
+GROUP BY country_name_len 
+ORDER BY country_name_len DESC;
+
+Output of Query 2:
+
+country_name_len |    avg_child_mort    
+------------------+----------------------
+               30 | 230.0269058295964126
+               24 | 356.5605381165919283
+               23 | 215.1520179372197309
+               22 | 259.0905829596412556
+               21 | 254.9681614349775785
+               19 | 160.7062329790937199
+               18 | 225.1986444703810635
+               17 | 359.8681614349775785
+               16 | 191.1690398673137171
+               15 | 276.4065022421524664
+               14 | 220.1529147982062780
+               13 | 333.8307922272047833
+               12 | 367.2949177877428998
+               11 | 291.5096343877509797
+               10 | 284.2703690927906175
+                9 | 273.0811659192825112
+                8 | 289.8338590395201073
+                7 | 260.1538936142478938
+                6 | 268.3915529209410897
+                5 | 284.4588777463808178
+                4 | 330.0448928749377180
+                3 | 272.0527653213751868
+                2 | 153.9327354260089686
+(23 rows)
