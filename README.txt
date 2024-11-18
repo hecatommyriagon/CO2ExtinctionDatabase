@@ -37,4 +37,61 @@ We used this command to fill in the table: psql \COPY username.data FROM data/ac
 
 And had to make this edit (because there was a strange character at the very beginning of the CSV): UPDATE data SET country ='Afghanistan' WHERE country = '﻿Afghanistan';
 
-3. 
+3.
+Question 1: Do increased CO2 levels lead to decreased life expectancy in North America?
+
+Query 1:
+SELECT life_expectancy, co2_pcap, country, year 
+FROM data
+WHERE country IN
+('Antigua and Barbuda',
+'Bahamas',
+'Barbados',
+'Belize',
+'Canada',
+'Costa Rica',
+'Cuba',
+'Dominica',
+'Dominican Republic',
+'El Salvador',
+'Grenada',
+'Guatemala',
+'Haiti',
+'Honduras',
+'Jamaica',
+'Mexico',
+'Nicaragua',
+'Panama',
+'St. Kitts and Nevis',
+'St. Lucia',
+'St. Vincent and the Grenadines',
+'Trinidad and Tobago',
+'USA')
+AND life_expectancy IS NOT NULL
+ORDER BY life_expectancy;
+
+Output of Query 1 (from middle of query):
+ life_expectancy | co2_pcap |            country             | year
+-----------------+----------+--------------------------------+------
+            52.0 |    0.138 | Haiti                          | 1982
+            52.1 |    0.225 | El Salvador                    | 1959
+            52.2 |    7.380 | Canada                         | 1910
+            52.3 |    0.147 | Haiti                          | 1983
+            52.3 |    0.131 | St. Lucia                      | 1951
+            52.3 |    0.321 | Honduras                       | 1963
+            52.3 |    0.015 | Barbados                       | 1943
+            52.3 |    0.260 | Nicaragua                      | 1955
+            52.4 |   20.700 | Trinidad and Tobago            | 1942
+            52.4 |    0.179 | Jamaica                        | 1948
+            52.6 |    8.430 | Canada                         | 1911
+            52.6 |    0.234 | Belize                         | 1947
+            52.7 |    0.016 | Cuba                           | 1939
+            52.7 |    0.053 | St. Vincent and the Grenadines | 1949
+            52.7 |    0.527 | Bahamas                        | 1943
+            52.7 |    0.146 | Haiti                          | 1984
+            52.7 |    0.239 | Costa Rica                     | 1945
+            52.7 |    0.073 | Grenada                        | 1941
+            52.8 |    1.160 | Mexico                         | 1954
+            52.9 |   12.400 | USA                            | 1909
+
+
