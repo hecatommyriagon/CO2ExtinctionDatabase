@@ -1,7 +1,12 @@
 /*
-    Lab 5 - ERD to SQL conversion script
+    CO2ExtinctionDatabase final project
     
-    Name:
+Names:
+   Mohamed Feituri 
+	Jacob Hulvey 
+	Noah Kreutz
+	Cristian Madrazo
+	Tyler Pina
  */
  
 -- Set your search path to include your username and public, 
