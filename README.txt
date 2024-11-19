@@ -41,10 +41,14 @@ And had to make this edit (because there was a strange character at the very beg
 Question 1: Do increased CO2 levels lead to decreased life expectancy in North America?
 
 Query 1:
-SELECT life_expectancy, co2_pcap, country, year 
-FROM data
-WHERE country IN
-('Antigua and Barbuda',
+SELECT
+(SELECT COUNT(*)
+FROM data AS a, data AS b
+WHERE a.life_expectancy IS NOT NULL AND
+b.life_expectancy IS NOT NULL AND
+a.country = b.country AND
+
+a.country IN ('Antigua and Barbuda',
 'Bahamas',
 'Barbados',
 'Belize',
@@ -66,33 +70,125 @@ WHERE country IN
 'St. Lucia',
 'St. Vincent and the Grenadines',
 'Trinidad and Tobago',
-'USA')
-AND life_expectancy IS NOT NULL
-ORDER BY life_expectancy;
+'USA') AND
+a.year = (b.year +1) AND
+a.co2_pcap <= b.co2_pcap AND
+a.life_expectancy <= b.life_expectancy) AS "CO_2 d or e and lex d or e",
 
-Output of Query 1 (from middle of query):
- life_expectancy | co2_pcap |            country             | year
------------------+----------+--------------------------------+------
-            52.0 |    0.138 | Haiti                          | 1982
-            52.1 |    0.225 | El Salvador                    | 1959
-            52.2 |    7.380 | Canada                         | 1910
-            52.3 |    0.147 | Haiti                          | 1983
-            52.3 |    0.131 | St. Lucia                      | 1951
-            52.3 |    0.321 | Honduras                       | 1963
-            52.3 |    0.015 | Barbados                       | 1943
-            52.3 |    0.260 | Nicaragua                      | 1955
-            52.4 |   20.700 | Trinidad and Tobago            | 1942
-            52.4 |    0.179 | Jamaica                        | 1948
-            52.6 |    8.430 | Canada                         | 1911
-            52.6 |    0.234 | Belize                         | 1947
-            52.7 |    0.016 | Cuba                           | 1939
-            52.7 |    0.053 | St. Vincent and the Grenadines | 1949
-            52.7 |    0.527 | Bahamas                        | 1943
-            52.7 |    0.146 | Haiti                          | 1984
-            52.7 |    0.239 | Costa Rica                     | 1945
-            52.7 |    0.073 | Grenada                        | 1941
-            52.8 |    1.160 | Mexico                         | 1954
-            52.9 |   12.400 | USA                            | 1909
+(SELECT COUNT(*)
+FROM data AS c, data AS d
+WHERE c.life_expectancy IS NOT NULL AND
+d.life_expectancy IS NOT NULL AND
+d.country = c.country AND
+
+c.country IN ('Antigua and Barbuda',
+'Bahamas',
+'Barbados',
+'Belize',
+'Canada',
+'Costa Rica',
+'Cuba',
+'Dominica',
+'Dominican Republic',
+'El Salvador',
+'Grenada',
+'Guatemala',
+'Haiti',
+'Honduras',
+'Jamaica',
+'Mexico',
+'Nicaragua',
+'Panama',
+'St. Kitts and Nevis',
+'St. Lucia',
+'St. Vincent and the Grenadines',
+'Trinidad and Tobago',
+'USA') AND
+c.year = (d.year +1) AND
+c.co2_pcap > d.co2_pcap AND
+c.life_expectancy > d.life_expectancy) AS "CO_2 u and lex u",
+
+(SELECT COUNT(*)
+FROM data AS e, data AS f
+WHERE e.life_expectancy IS NOT NULL AND
+f.life_expectancy IS NOT NULL AND
+f.country = e.country AND
+
+e.country IN ('Antigua and Barbuda',
+'Bahamas',
+'Barbados',
+'Belize',
+'Canada',
+'Costa Rica',
+'Cuba',
+'Dominica',
+'Dominican Republic',
+'El Salvador',
+'Grenada',
+'Guatemala',
+'Haiti',
+'Honduras',
+'Jamaica',
+'Mexico',
+'Nicaragua',
+'Panama',
+'St. Kitts and Nevis',
+'St. Lucia',
+'St. Vincent and the Grenadines',
+'Trinidad and Tobago',
+'USA') AND
+e.year = (f.year +1) AND
+e.co2_pcap <= f.co2_pcap AND
+e.life_expectancy > f.life_expectancy) AS "CO_2 d or e and lex u",
+
+(SELECT COUNT(*)
+FROM data AS g, data AS h
+WHERE g.life_expectancy IS NOT NULL AND
+h.life_expectancy IS NOT NULL AND
+h.country = g.country AND
+
+g.country IN ('Antigua and Barbuda',
+'Bahamas',
+'Barbados',
+'Belize',
+'Canada',
+'Costa Rica',
+'Cuba',
+'Dominica',
+'Dominican Republic',
+'El Salvador',
+'Grenada',
+'Guatemala',
+'Haiti',
+'Honduras',
+'Jamaica',
+'Mexico',
+'Nicaragua',
+'Panama',
+'St. Kitts and Nevis',
+'St. Lucia',
+'St. Vincent and the Grenadines',
+'Trinidad and Tobago',
+'USA') AND
+g.year = (h.year +1) AND
+g.co2_pcap > h.co2_pcap AND
+g.life_expectancy <= h.life_expectancy) AS "CO_2 u and lex d or e"
+FROM data
+LIMIT 1;
+
+Output of Query 1:
+ CO_2 d or e and lex d or e | CO_2 u and lex u | CO_2 d or e and lex u | CO_2 u and lex d or e
+----------------------------+------------------+-----------------------+-----------------------
+                       1658 |             1211 |                   983 |                   954
+(1 row)
+
+To understand the output of the query some explanations are necessary. Each column title need to have "The number of times " and " across 1 year" added to them at the beginning and end respectively, CO_2 stands for CO_2 emissions per capita, lex stands for life expectancy, d stands for down (decreased), e stand for equal to (stayed the same), and u stands for up or increased so each column can be interpret as follows:
+CO_2 d or e and lex d or e -> The number of times CO_2 emissions decreased or stayed the same and life expectancy decreased or stayed the same across 1 year.
+CO_2 u and lex u -> The number of times CO_2 emissions increased and life expectancy increased across 1 year.
+CO_2 d or e and lex u -> The number of times CO_2 emissions decreased or stayed the same and life expectancy increased across 1 year.
+CO_2 u and lex d or e -> The number of times CO_2 emissions increased and life expectancy decreased or stayed the same across 1 year.
+
+This question is interesting because intuition tells you that more CO_2 leads to decreased life expectancy, but as CO_2 increases generally technology improves leading to longer lives so the answer is ambiguous. The output of the query answers the question by demonstrating that only about a fourth of the time does life expectancy decrease with higher CO_2 levels.
 
 
 Question 2: Do countries with longer names have higher infant mortality rates?
