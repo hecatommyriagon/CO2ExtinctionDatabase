@@ -3,7 +3,7 @@
 	Jacob Hulvey 10882625
 	Noah Kreutz 10904022
 	Cristian Madrazo 10924296
-	Tyler Pina
+	Tyler Pina 10910575
 2. We chose the CO2 Emissions per capita, child mortality, GDP per capita, and life expectancy datasets from Gapminder. These datasets are interesting because there is extensive data specifying both year and country for most of the countries of the world back to 1800. This allows global and local trends to be calculated. The first column contains the country (the country list is not exhaustive). The second column contains the year (from 1800 to 2022). The third column contains the co2 emissions per capita in tons, consumption based (source: http://gapm.io/dco2_consumption_historic). The fourth column contains inflation adjusted gdp per capita in 2017 US dollars (source: http://gapm.io/dgdpcap_cppp). The fifth column contains the life expectancy at birth (source: http://gapm.io/dlex). The sixth column contains child mortality specifically the number of deaths out of 1000 children from ages 0 to 5 (source: http://gapm.io/du5mr).
 
 First 10 rows:
