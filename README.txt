@@ -13,10 +13,10 @@
    and country for most of the countries of the world back to 1800. This allows global and local trends 
    to be calculated. The first column contains the country (the country list is not exhaustive). The second 
    column contains the year (from 1800 to 2022). The third column contains the co2 emissions per capita in 
-   tons, consumption based (source: http://gapm.io/dco2_consumption_historic). The fourth column contains inflation 
-   adjusted gdp per capita in 2017 US dollars (source: http://gapm.io/dgdpcap_cppp). The fifth column contains 
-   the life expectancy at birth (source: http://gapm.io/dlex). The sixth column contains child mortality specifically 
-   the number of deaths out of 1000 children from ages 0 to 5 (source: http://gapm.io/du5mr).
+   tons, consumption based [1]. The fourth column contains inflation 
+   adjusted gdp per capita in 2017 US dollars [2]. The fifth column contains 
+   the life expectancy at birth [3]. The sixth column contains child mortality specifically 
+   the number of deaths out of 1000 children from ages 0 to 5 [4].
 
    First 10 rows:
          country       | year | co2_pcap | gdp_pcap | life_expectancy | child_mortality
@@ -266,3 +266,10 @@
    This question is interesting because it is a complete shot in the dark trying to find a correlation between data features 
    that are not related in reality. While the answer is a bit ambiguous, we can see that there is generally no correlation to 
    be observed in our analysis.  
+
+
+Sources:
+1.	Gapminder, “CO₂ Consumption Historic Data,” [Online]. Available: http://gapm.io/dco2_consumption_historic. [Accessed: 17-Nov-2024].
+2.	Gapminder, “GDP per Capita (PPP),” [Online]. Available: http://gapm.io/dgdpcap_cppp. [Accessed: 17-Nov-2024].
+3.	Gapminder, “Life Expectancy,” [Online]. Available: http://gapm.io/dlex. [Accessed: 17-Nov-2024].
+4.	Gapminder, “Under-5 Mortality Rate,” [Online]. Available: http://gapm.io/du5mr. [Accessed: 17-Nov-2024].
