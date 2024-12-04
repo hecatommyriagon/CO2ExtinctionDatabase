@@ -10,10 +10,8 @@ def query_table(country, year):
         connection = psycopg2.connect(
             host = "codd.mines.edu",
             database = "csci403",
-            # user = input("User: "),
-            user = "m10924296",
-            # password =getpass.getpass("Password: "),
-            password = "password",
+            user = input("User: "),
+            password =getpass.getpass("Password: "),
             port=5433
         )
         cursor = connection.cursor()
