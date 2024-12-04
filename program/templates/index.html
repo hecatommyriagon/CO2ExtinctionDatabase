@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Country Statistic Finder</title>
+    <style>
+        /* Styling for the banner logo */
+        .banner {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .banner img {
+            width: 50%; /* Scales the logo to 50% of its original width */
+            height: auto; /* Maintains aspect ratio */
+        }
+    </style>
 </head>
 <body>
+    <!-- Banner logo -->
+    <div class="banner">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Country Statistic Finder Logo">
+    </div>
+
     <h1>Enter a Year and a Country</h1>
     <form method="POST">
         <label for="year">Year:</label>
