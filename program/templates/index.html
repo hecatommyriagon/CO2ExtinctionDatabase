@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Statistic Finder</title>
+</head>
+<body>
+    <h1>Enter a Year and a Country</h1>
+    <form method="POST">
+        <label for="year">Year:</label>
+        <input type="text" id="year" name="year" required>
+        <br><br>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    {% if year and country %}
+        <h2>Saved Input:</h2>
+        <p>Year: {{ year }}</p>
+        <p>Country: {{ country }}</p>
+        <p>CO2 Per Capita: {{ co2 }}</p>
+        <p>GDP Per Capita: {{ gdp }}</p>
+        <p>Avg. Life Expectancy: {{ life }}</p>
+        <p>Child Mortalities per 1000: {{ mort }}</p>
+    {% endif %}
+</body>
+</html>
